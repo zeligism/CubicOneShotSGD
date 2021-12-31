@@ -1,0 +1,1 @@
+JA_FILE="_experiments.ja" sbatch --array=1-$(wc -l < "${JA_FILE}") --export=JA_FILE "ja_task.job"
