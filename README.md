@@ -22,7 +22,7 @@ sh generate_ja.sh
 sh submit_ja.sh
 ```
 
-If training doesn't take that long on a cpu, and you want to make use of multi-processing, try something like this:
+If training doesn't take that long on a cpu, and you want to make use of multi-processing, try this:
 ```
 sh generate_ja.sh | sed 1d | parallel {}
 ```
