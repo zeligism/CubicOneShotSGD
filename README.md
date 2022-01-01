@@ -18,6 +18,11 @@ Scripts for generating and submitting a job array are also available (but not te
 
 Simply generate the job array and then submit the tasks as folows:
 ```
-bash generate_ja.sh
-bash submit_ja.sh
+sh generate_ja.sh
+sh submit_ja.sh
+```
+
+If training doesn't take that long on a cpu, and you want to make use of multi-processing, try something like this:
+```
+sh generate_ja.sh | sed 1d | parallel {}
 ```
