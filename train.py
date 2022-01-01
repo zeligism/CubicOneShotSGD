@@ -190,7 +190,7 @@ class ProgressMeter(object):
         fmt = '{:' + str(num_digits) + 'd}'
         return '[' + fmt + '/' + fmt.format(num_batches) + ']'
 
-def plot_lines(losses_dict, title="", log_scale=False, filename=None):
+def plot_lines(losses_dict, title="", log_scale=False, show_plot=True, filename=None):
     plt.figure(figsize=(10,5))
     if log_scale:
         title += " (log scale)"
@@ -203,7 +203,8 @@ def plot_lines(losses_dict, title="", log_scale=False, filename=None):
     plt.legend()
     if filename is not None:
         plt.savefig(filename)
-    plt.show()
+    if show_plot:
+        plt.show()
     plt.close()
 
 
@@ -272,7 +273,7 @@ def create_regularizer(p):
     c = (0., 1., 1./2, 1./6, 1./24)
     def regularizer(model):
         params = nn.utils.parameters_to_vector(model.parameters())
-        return torch.linalg.norm(params).pow(p) * c[p]
+        return torch.norm(params).pow(p) * c[p]
     return regularizer
 
 
@@ -383,8 +384,10 @@ def main(args):
 
     train_losses = {k: v for k, v in stats.items() if "train_loss" in k}
     val_losses = {k: v for k, v in stats.items() if "val_loss" in k}
-    plot_lines(train_losses, "Training Loss", log_scale=args.log_scale)
-    plot_lines(val_losses, "Validation Loss", log_scale=args.log_scale, filename=args.save_fig)
+    plot_lines(train_losses, "Training Loss",
+               log_scale=args.log_scale, show_plot=args.save_fig is None)
+    plot_lines(val_losses, "Validation Loss",
+               log_scale=args.log_scale, show_plot=args.save_fig is None, filename=args.save_fig)
 
 
 if __name__ == "__main__":
