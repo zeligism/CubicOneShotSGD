@@ -1,11 +1,11 @@
 
-ja_file="_experiments.ja"
+ja_file="${1:-"_exp.ja"}"
 mkdir -p "plots"
 rm -f "${ja_file}"
 
 # Set up your default options here
 run="python train.py"
-defaults="--cuda -s 1 -w 1"
+defaults="--cuda -s 1 -w 1 --log_scale"
 default_run="${run} ${defaults}"
 
 # Define the varying options here
