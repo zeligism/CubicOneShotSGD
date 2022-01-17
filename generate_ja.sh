@@ -5,12 +5,15 @@ rm -f "${ja_file}"
 
 # Set up your default options here
 run="python train.py"
-defaults="--cuda -s 1 -w 1 --log_scale"
+defaults="--cuda -s 1 -w 1"
+#defaults="--cuda -s 1 -w 1 --log_scale"
 default_run="${run} ${defaults}"
 
 # Define the varying options here
 REG_POWS=(2 3 4)
 REG_COEFFS=(0.00001 0.0001 0.001 0.01 0.1 1.0 10.0)
+#REG_POWS=(2 3)
+#REG_COEFFS=(0.01 0.1 1.0 10.0)
 
 # First, add the default run to job array
 echo "${default_run} --save_fig 'plots/plot(default).png'" >> "${ja_file}"
